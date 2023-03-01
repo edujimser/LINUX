@@ -1,0 +1,23 @@
+-- Problemas con el terminal de windows 11 en virtualBox
+
+
+Acceder al terminal general con:
+
+1. Pulsamos Control+Alt+F3
+2. Acceder como su en la terminal
+3. adduser usurname sudo
+4. sudo -i edu
+
+
+Acceder gedit desde el terminal general:
+
+1.sudo apt-get update
+2.sudo apt-get install gedit
+
+
+Salir del terminal general y acceder al escitorio:
+
+1. Pulsa ALT+F2
+2. gedit admin:/etc/default/locale (modificamos el archivo)
+3. Línea dos por LANG="en_US.UTF-8"
+4. Reiniciamos el usuario

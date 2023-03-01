@@ -1,0 +1,66 @@
+-- INSTALACION	
+1. sudo apt install apache2
+2. Ir al navegador para revisar su instalación http:\\localhost 
+
+-- DIRECTORIO DE ALMACENAMIENTO 
+1. /var/www/html
+
+-- ADMINISTRACION DE SERVICIO
+1. Ver el estado: systemctl status apache2
+2. Parar el estado: systemctl stop apache2
+3. Iniciar el estado: systemctl start apache2
+3. Reiniciar el estado: systemctl reload apache2
+
+-- DIRECTORIOS DE APACHE	
+1. /etc/apache2
+2. /etc/apache2/mods-aviable (Modulos disponibles)
+3. /etc/apache2/mods-enable (Modulos habilitados)
+
+	-- LOG	
+	1. /var/log/apache2/access.log
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+CREAR HOST VIRTUALES
+
+1. Dirección de Host: /var/www/
+2. Creamos una carpeta tienda1
+3. creamos una pagina web de ejemplo: tienda1/index.html
+
+4. configurar los host en apache2, es decir en nuestra máquina
+	4.1 dirección: /etc/apache2/sistes-aviable (Dispnibles)
+	4.2 copiamos la configuración de la pagina de apache para nuestros host virtuales: cp 000-default-conf tienda1.conf
+	4.3 Edita la configuración
+		- ServerName: tienda1.com (Dominio de la web)
+		- DocumentRoot: /var/www/tienda (Carpeta de los archivos)
+	4.4 Habilitar los sitios (Habilitar)
+		- a2ensite tienda1 (forma corta) 
+		- a2ensite tienda2 
+	4.5 Reiniciar apache: system reload apache2
+
+5. Modificar el fichero HOST /etc/hosts
+	5.1 gedit etc/hosts
+	5.2 127.0.0.1	tienda1.com
+	    127.0.0.1	tienda2.com
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+SEGURIDAD PAGINA WEBN
+
+1. Habilitar el módulo ssl: a2enmod ssl
+2. Ir al fiechero /etc/apache2/sites-available/tienda.conf
+	2.1 introducir:
+		<VirtualHost *:443>
+			ServerName tienda1.com
+			DocumentRoot /var/www/tienda1
+	
+			SSLEngine On
+			SSLCertificateFile /etc/ssl/certs/selfsigned.crt
+			SSLCertificateKeyFile /etc/ssl/private/selfsigned.key
+	
+		</VirtualHost>
+3. Reiniciar el servicio de apache2 
+
+4. Bloquear que solo se pueda acceder con https /etc/apache2/sites-available/tienda.conf
+	4.1 Insertar en el puerto a redirigir Redirect / https://tienda1.com 
+ 	
