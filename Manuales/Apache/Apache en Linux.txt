@@ -48,6 +48,7 @@ CREAR HOST VIRTUALES
 SEGURIDAD PAGINA WEBN
 
 1. Habilitar el módulo ssl: a2enmod ssl
+	1.1 Crear certificado: openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/selfsigned.key -out /etc/ssl/certs/selfsigned.crt
 2. Ir al fiechero /etc/apache2/sites-available/tienda.conf
 	2.1 introducir:
 		<VirtualHost *:443>
