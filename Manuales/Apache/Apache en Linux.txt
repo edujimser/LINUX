@@ -42,6 +42,10 @@ CREAR HOST VIRTUALES
 	5.1 gedit etc/hosts
 	5.2 127.0.0.1	tienda1.com
 	    127.0.0.1	tienda2.com
+	    
+Notas:
+	- Si el archivo 000-default.conf sites-aviable no lo ponemos en comentarios el servidor apache apunta la ruta indicada en él
+	- La carpeta /var/www/html se puede borrar y solo trabajar sobre /var/wwww
 
 
 ----------------------------------------------------------------------------------------------------------------------------------
