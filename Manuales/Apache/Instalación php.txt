@@ -1,0 +1,6 @@
+-- INSTALACIÓN PHP DEL INTERPRETE EN UBUNTU
+1. apt install php
+
+- INSTALACIÓN PHP DEL INTERPRETE EN UBUNTU
+1. apt install libapache2-mod-php
+  1.1 Forma manual, po si mismo php lo instala solo
