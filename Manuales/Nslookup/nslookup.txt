@@ -1,0 +1,83 @@
+-- Servidores DNS actualmente configurados en el equipo LINUX
+	
+	resolvectl status
+	
+	Link 2 (enp0s3)
+      Current Scopes: DNS
+	Protocols: +DefaultRoute +LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+	Current DNS Server: 100.90.1.1 (Servidor DNS)
+      DNS Servers: 100.90.1.1 100.100.1.1 192.168.1.1
+
+
+-- Herramienta nslookup
+	
+	Esta herramienta nos permite saber la información de una IP, ejemplo:
+	
+	1. nslookup ipf.es
+		Server:	127.0.0.53 (El servidor que nos devuelve la información, es servicio de DNS 100.90.1.1)
+		Address:	127.0.0.53#53
+
+		Non-authoritative answer: (El servidor DNS 100.90.1.1 no tiene cacheada la Ip de IFP por eso salta a buscarla a otro Server de DNS)
+		Name:	ipf.es
+		Address: 217.76.128.47 (Dirección IP)
+	
+	2. nslookup -q=soa ipf.es
+		soa = start of authoritive: Hace referencia al servidor DNS autorizado que tiene cacheado la dirección IP de IPF
+
+		Server:		127.0.0.53
+		Address:	127.0.0.53#53
+
+		Non-authoritative answer:
+		ipf.es
+			origin = dns11.servidoresdns.net (Servidor con autoridad para tener el certificado)
+			mail addr = hostmaster.servidoresdns.net
+			serial = 2007013033
+			refresh = 21600
+			retry = 3600
+			expire = 2419200
+			minimum = 86400
+
+	3. nslookup  pf.es dns11.servidoresdns.net
+		Indico el servidor autoritativo es decir, el DNS que tiene la IP de ifp
+	
+		Server:		dns11.servidoresdns.net
+		Address:	217.76.128.133#53
+
+		Name:	ipf.es
+		Address: 217.76.128.47
+
+	3. nslookup  -q=mx gmail.com	
+		Para emails con direcciones smtp
+
+		Server:		127.0.0.53
+		Address:	127.0.0.53#53
+
+		Non-authoritative answer:
+		gmail.com	mail exchanger = 20 alt2.gmail-smtp-in.l.google.com.
+		gmail.com	mail exchanger = 10 alt1.gmail-smtp-in.l.google.com.
+		gmail.com	mail exchanger = 40 alt4.gmail-smtp-in.l.google.com.
+		gmail.com	mail exchanger = 30 alt3.gmail-smtp-in.l.google.com.
+		gmail.com	mail exchanger = 5 gmail-smtp-in.l.google.com.
+
+	4. nslookup  -q=txt instagram.com
+		Sirver para conocer los datos y para saber la autoridad de la pagina web introduciendo un valor en el txt en mi dominio de dns aleatorio.
+
+	Truncated, retrying in TCP mode.
+		Server 127.0.0.53
+		Address:	127.0.0.53#53Non-authoritative answer:instagram.com	
+		Non-authoritative answer:
+		instagram.com	text = "4cbb1b68-601f-4801-8e7f-e8f68a4a41dd"
+		instagram.com	text = "google-site-verification=_iQgLr68Rdg7YnN2PqOljSG5dnWOFUUXISF9R77fs5c"
+		instagram.com	text = "nEXgIFIbDifAKlSMQvAhly5SA-vpsAkm5wiOdwdkrzY"
+		instagram.com	text = "adobe-idp-site-verification=367fda82-a8bb-46cf-9cff-0062d452d229"
+		instagram.com	text = "hyWdekepiNsp/V9b1JCR+wZDdzbESurl4GqY+FLMfiN+7aeFaway0Art+kNDHeL5OnGZipNeV/iIC+lOONSQVQ=="
+		instagram.com	text = "google-site-verification=GGtId51KFyq0hqX2xNvt1u0P9Xp0C7k6pp9do49fCNw"
+		instagram.com	text = "ms=ms86975275"
+		instagram.com	text = "v=spf1 include:facebookmail.com include:_spf.fb.com -all"
+
+	5. nslookup 1.1.1.1
+		Es una consulta inversa pero puede ser que no funcione
+
+
+
+		
