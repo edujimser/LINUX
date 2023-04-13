@@ -1,0 +1,4 @@
+1. Dirección archivo: sudo nano /etc/systemd/resolved.conf
+2. Modificar comentario #DNS o añadir DNS (Ejemplo DNS=8.8.8.8)
+3. Reniciar sistema: sudo systemctl restart systemd-resolved
+4. Probar con ping www.paginaweb.com
